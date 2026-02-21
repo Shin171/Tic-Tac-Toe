@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Tic_Tac_Toe
 {
     public partial class Form1 : Form
@@ -11,6 +13,9 @@ namespace Tic_Tac_Toe
         public string player1 = "X";
         public string player2 = "O";
         public string[] board = new string[9];
+        public int scoreX = 0;
+        public int scoreO = 0;
+        public string winner = null;
 
         public string placeAttack(int pos)
         {
@@ -19,9 +24,9 @@ namespace Tic_Tac_Toe
             board[pos] = currentPlayer;
             return currentPlayer;
         }
+
         public void checkWinner()
         {
-            string winner = null;
 
             // Rows
             if (board[0] != null && board[0] == board[1] && board[1] == board[2])
@@ -46,6 +51,7 @@ namespace Tic_Tac_Toe
             if (winner != null)
             {
                 MessageBox.Show($"Player {winner} wins!", "Game Over");
+                Scoring();
                 resetGame();
                 return;
             }
@@ -81,7 +87,23 @@ namespace Tic_Tac_Toe
             button8.Text = "";
             button9.Text = "";
 
+            winner = null;
             turn = 0;
+        }
+
+        public void Scoring()
+        {
+            if (winner.Equals("X"))
+            {
+                scoreX++;
+                label1.Text = "X = " + scoreX;
+            }
+            else
+            {
+                scoreO++;
+                label2.Text = "O = " + scoreO;
+            }
+
         }
 
 
@@ -171,18 +193,24 @@ namespace Tic_Tac_Toe
 
         private void Button_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            label1.Text = "X = " + "0";
+            label2.Text = "O = " + "0";
         }
 
 
         private void label1_Click(object sender, EventArgs e)
         {
+            
+        }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
